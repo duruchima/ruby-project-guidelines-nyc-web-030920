@@ -41,9 +41,9 @@ class GetRecipes
     
 end
 
-recipes = GetRecipes.new.get_recipe_by_name("sandwich")
-puts recipes
-binding.pry
+# recipes = GetRecipes.new.get_recipe_by_name("sandwich")
+# puts recipes
+
 
 # recipe1 = GetRecipes.new.recipe_by_name("ham")
 # puts recipe1
