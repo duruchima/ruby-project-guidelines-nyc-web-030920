@@ -11,10 +11,12 @@ recipes_list = data["results"]
 
 
 
-u1 = User.new(name: "Tashawn")
-u2 = User.new(name: "Alex")
-u3 = User.new(name: "Ethan")
-
+u1 = User.create(name: "Tashawn")
+u2 = User.create(name: "Alex")
+u3 = User.create(name: "Ethan")
+lunch = Meal.create(user_id: 1,recipe_id: 5)
+breakfast = Meal.create(user_id:2,recipe_id: 6)
+dinner = Meal.create(user_id: 3,recipe_id: 8)
 
 recipes_list.each do |recipe_hash|
     recipe = Recipe.create(title: recipe_hash["title"])
@@ -28,7 +30,7 @@ recipes_list.each do |recipe_hash|
     
 end
  
-
+binding.pry
     array = data["results"]
     ingredient_array = []
     array.collect do |hash|
