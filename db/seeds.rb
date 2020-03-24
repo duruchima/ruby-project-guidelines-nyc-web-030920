@@ -17,16 +17,15 @@ u3 = User.new(name: "Ethan")
 
 
 recipes_list.each do |recipe_hash|
-    binding.pry
-    recipe = Recipe.create(title: recipe_has["title"])
+    recipe = Recipe.create(title: recipe_hash["title"])
     ingredientsArray = recipe_hash["ingredients"].split(",")
+    
 
     ingredientsArray.each do |ingredient_name|
         ingredient = Ingredient.find_or_create_by(name: ingredient_name)
-        IngredientRecipe.create(recipe: recipe, ingredient: ingredient)
+        RecipeIngredient.create(recipes_id: recipe.id, ingredients_id: ingredient.id)
     end
-
-    Recipe.create(title: recipe_hash["title"], ingredients: recipe_hash["ingredients"])
+    
 end
  
 
