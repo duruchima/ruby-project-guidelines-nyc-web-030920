@@ -30,7 +30,6 @@ recipes_list.each do |recipe_hash|
     
 end
  
-binding.pry
     array = data["results"]
     ingredient_array = []
     array.collect do |hash|
