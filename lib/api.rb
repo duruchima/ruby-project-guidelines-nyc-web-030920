@@ -45,3 +45,10 @@ recipes = GetRecipes.new.get_recipe_by_name("sandwich")
 puts recipes
 binding.pry
 
+# recipe1 = GetRecipes.new.recipe_by_name("ham")
+# puts recipe1
+
+# recipe2 = GetRecipes.new.get_recipe_by_ingredients("ham, cheese")
+#  puts JSON.parse(recipe2)
+
+
