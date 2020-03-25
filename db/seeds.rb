@@ -4,6 +4,10 @@ require 'json'
 require 'net/http'
 
 Recipe.destroy_all
+User.destroy_all
+Ingredient.destroy_all
+Meal.destroy_all
+RecipeIngredient.destroy_all
 
 response = RestClient.get("http://www.recipepuppy.com/api/")
 data = JSON.parse(response)
@@ -14,9 +18,9 @@ recipes_list = data["results"]
 u1 = User.create(name: "Tashawn")
 u2 = User.create(name: "Alex")
 u3 = User.create(name: "Ethan")
-lunch = Meal.create(user_id: 1,recipe_id: 5)
-breakfast = Meal.create(user_id:2,recipe_id: 6)
-dinner = Meal.create(user_id: 3,recipe_id: 8)
+lunch = Meal.create(user_id: u1.id,recipe_id: 5)
+breakfast = Meal.create(user_id: u2.id,recipe_id: 6)
+dinner = Meal.create(user_id: u3.id,recipe_id: 8)
 
 recipes_list.each do |recipe_hash|
     recipe = Recipe.create(title: recipe_hash["title"])
