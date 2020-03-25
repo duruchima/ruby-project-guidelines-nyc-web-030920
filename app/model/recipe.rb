@@ -39,6 +39,18 @@ end
     #     objects
     # end
 
+    def popularity #shows the number of times a recipe has been made (into a meal)
+        array = []
+        Meal.all.select do |meal|
+            if meal.recipe == self
+                array << meal
+            end
+        end
+        puts "#{self.title} has been made #{array.length} times!"
+    end
 
+    def self.random #returns a random recipe from the DB for the user
+        Recipe.all.sample
+    end
 
 end

@@ -13,6 +13,9 @@ response = RestClient.get("http://www.recipepuppy.com/api/")
 data = JSON.parse(response)
 recipes_list = data["results"]
 
+response2 = RestClient.get("http://www.recipepuppy.com/api/?p=45")
+data2 = JSON.parse(response2)
+recipes_list2 = data2["results"]
 
 
 u1 = User.create(name: "Tashawn")
@@ -37,7 +40,28 @@ recipes_list.each do |recipe_hash|
     end
     
 end
+
+recipes_list2.each do |recipe_hash|
+    recipe = Recipe.create(title: recipe_hash["title"])
+    ingredientsArray = recipe_hash["ingredients"].split(",")
+    
+
+    ingredientsArray.each do |ingredient_name|
+        ingredient = Ingredient.find_or_create_by(name: ingredient_name)
+        RecipeIngredient.create(recipes_id: recipe.id, ingredients_id: ingredient.id)
+    end
+    
+end
  
+    array = data["results"]
+    ingredient_array = []
+    array.collect do |hash|
+        
+        hash.each do |k, v| if k == "ingredients"
+            ingredient_array << v.split(',')
+        end
+    end
+    end
 
     #array = data["results"]
     #ingredient_array = []
