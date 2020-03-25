@@ -49,8 +49,15 @@ end
         puts "#{self.title} has been made #{array.length} times!"
     end
 
+    def self.most_popular
+        array = self.all.select do |meal|
+            binding.pry
+            meal.to_h{|m| [m, 1]}
+        end
+    end
+
     def self.random #returns a random recipe from the DB for the user
-        binding.pry
+        
         Recipe.all.sample
     end
 

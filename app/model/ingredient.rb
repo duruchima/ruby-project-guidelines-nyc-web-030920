@@ -9,7 +9,6 @@ class Ingredient < ActiveRecord::Base
         recipes_names = []
         new_array.map do |recipe_id| recipe_name << Recipe.find(recipe_id) end
         recipe_name.map {|recipes| recipes_names << recipes.title}
-        binding.pry
         return recipes_names
     end
 end
