@@ -8,3 +8,5 @@ gem "require_all"
 gem 'rake'
 gem 'rest-client'
 gem 'httparty'
+gem 'tty-box'
+gem 'tty-prompt'
