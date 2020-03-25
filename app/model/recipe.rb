@@ -50,6 +50,7 @@ end
     end
 
     def self.random #returns a random recipe from the DB for the user
+        binding.pry
         Recipe.all.sample
     end
 

@@ -9,8 +9,8 @@ class User < ActiveRecord::Base
         Recipe.all.select do |recipe|
            title =  recipe.title.downcase
                 if title.include?(keyword)  
-                    array << "#{i+1}. #{recipe.title}"
-                    i += 1
+                    array << "#{recipe.title}"
+                    
                 end
         end
         array
