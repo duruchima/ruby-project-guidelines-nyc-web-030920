@@ -10,7 +10,11 @@ class Recipe < ActiveRecord::Base
     #     end
     # end
 def ingredients 
-    IngredientRecipe.all.select == self
+    array = RecipeIngredient.all.select {|recipe_ingredients| recipe_ingredients.recipes_id == self.id}
+    #array.map {|ingredient_obj| Ingredient.all.select {|ingredient|ingredient.id == ingredient_obj.ingredients_id}}
+    new_array = array.map{|ingredient| ingredient.ingredients_id}
+    Ingredient.all.select {|ingredient|ingredient.id == array.map {|ingredient_obj|ingredient_obj.ingredients_id}}
+    binding.pry
 end
 
     # def has_ingredient(ingredient)
