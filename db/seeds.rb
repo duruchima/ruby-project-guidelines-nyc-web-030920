@@ -22,35 +22,38 @@ lunch = Meal.create(user_id: u1.id,recipe_id: 5)
 breakfast = Meal.create(user_id: u2.id,recipe_id: 6)
 dinner = Meal.create(user_id: u3.id,recipe_id: 8)
 
+    #all_ingredients = ingredient_array.flatten.uniq
+    #stripped_ingredients = all_ingredients.map{|ing| ing.strip}.uniq
+
 recipes_list.each do |recipe_hash|
     recipe = Recipe.create(title: recipe_hash["title"])
-    ingredientsArray = recipe_hash["ingredients"].split(",")
-    
+    ingredientsarray = recipe_hash["ingredients"].split(",")
+    all_ingredients = ingredientsarray.flatten.uniq
+    stripped_ingredients = all_ingredients.map{|ing| ing.strip}.uniq
 
-    ingredientsArray.each do |ingredient_name|
+    stripped_ingredients.each do |ingredient_name|
         ingredient = Ingredient.find_or_create_by(name: ingredient_name)
         RecipeIngredient.create(recipes_id: recipe.id, ingredients_id: ingredient.id)
     end
     
 end
  
-binding.pry
-    array = data["results"]
-    ingredient_array = []
-    array.collect do |hash|
+
+    #array = data["results"]
+    #ingredient_array = []
+    #array.collect do |hash|
         
-        hash.each do |k, v| if k == "ingredients"
-            ingredient_array << v.split(',')
-        end
-    end
-    end
+       # hash.each do |k, v| if k == "ingredients"
+      #      ingredient_array << v.split(',')
+     #   end
+    #end
+    #end
+    #all_ingredients = ingredient_array.flatten.uniq
+    #stripped_ingredients = all_ingredients.map{|ing| ing.strip}.uniq
+    #stripped_ingredients.map do |element|
+   #binding.pry
+    #Ingredient.create(name: element)
 
-    all_ingredients = ingredient_array.flatten.uniq
-
-all_ingredients.map do |element|
-   
-    Ingredient.create(name: element)
-end
 
 
 "string"

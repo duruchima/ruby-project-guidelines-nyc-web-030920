@@ -15,23 +15,22 @@ def ingredients
     new_array = array.map{|ingredient| ingredient.ingredients_id}
     #Ingredient.find() {|ingredient|ingredient.id == new_array.map {|ingredient_obj|ingredient_obj.ingredients_id}}
     #Recipe.joins(:ingredients).where(ingredients: { id: new_array })
-    filtered_meals = Ingredient.includes(:ingredients).where("ingredients.id" => new_array)
-    binding.pry
+    #filtered_meals = Ingredient.includes(:ingredients).where("ingredients.id" => new_array)
+    ingredient_name = []
+    ingredients_names = []
+    new_array.map do |ingredient_id| ingredient_name << Ingredient.find(ingredient_id) end
+    ingredient_name.map {|ingredients| ingredients_names << ingredients.name}
+    return ingredients_names
 end
 
-    # def has_ingredient(ingredient)
-    #     if self.ingredients 
-    #         ingredients =  self.ingredients
-           
-    #         array = ingredients.split(',')
-    #         array.find do |element|
-    #             element == ingredient
-    #         end
-    #         return selff
-    #     else
-    #         put "it doesn't have that"
-    #     end
-    # end
+    def has_ingredient(ingredient)
+        array =  self.ingredients
+         if array.include?(ingredient)
+             return "This recipe contains #{ingredient}, here is a list of all the ingredients it contains #{self.ingredients}."
+         else
+             return "This recipe does not contain #{ingredient}"            
+         end
+     end
 
     # def self.find_ingredient(ingredient)
     #     objects = self.all.select do |recipe|
