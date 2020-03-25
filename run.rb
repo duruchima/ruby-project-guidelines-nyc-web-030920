@@ -27,6 +27,7 @@ ActiveRecord::Base.logger.level = 1
         menu.choice 'Give me a random recipe'
         menu.choice 'Show me the most popular recipe'
         menu.choice 'Show me my meals'
+        menu.choice 'Exit'
     end    
      #if choice is ingredient
         if input == 'Ingredient'
@@ -44,6 +45,7 @@ ActiveRecord::Base.logger.level = 1
                     recipe = Recipe.find_by(title: recipe_title)
                     puts "Okay..Here's the ingredients for #{recipe_title}!"
                     puts "#{recipe.ingredients.join(', ')}"
+                    prompt.yes
                     #figure out how to send them back to line 24
                 end
         elsif input == 'Keyword'
@@ -70,14 +72,13 @@ ActiveRecord::Base.logger.level = 1
         elsif input == 'Show me the most popular recipe'
 
         elsif input == 'Show me my meals'
-          puts "You've eaten these recipes: #{user.meals_with_name.join(', ')}."
+          puts "You've eaten these recipes: #{user.meals_with_name.join(', ')}."\
+        elsif input == 'Exit'
+            exit
         else 
             puts "We didn't find anything in the database for #{input}."
             puts "Please try again"
             #back to prompt
-
-        
-        
         end
 
         
