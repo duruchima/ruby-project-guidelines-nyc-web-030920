@@ -21,32 +21,37 @@ user = User.new(name: name) #make sure you change this to create
 #executing method based on input choice
     if input == 'ingredient'
     puts "What ingredient would you like to search for?"
-    end
+    
 
 #searching by keyword
     elsif input == 'keyword'
     puts 'What keyword would you like to search for?'   
     keyword_input = gets.chomp.downcase
+    
     #search DB for all matching recipes
-    results = user.retrieve_recipe(keyword_input)
     puts "here's what we found for #{keyword_input}"
+    results = user.retrieve_recipe(keyword_input)
     puts results
 
-#does user want more information about a recipe
-    puts "would you like to check out any of these recipes?"
+    #does user want more information about a recipe
+    puts "Would you like to check out any of these recipes?"
     yes_no = gets.chomp.downcase
+
+    #if they do then get it for them!
         if yes_no = 'yes' || 'y'
-        puts "Which recipe would you like more information about?"
+        puts "Enter the number of the recipe you'd like."
+            num_of_input = gets.chomp.to_i
+            index_of_array = num_of_input - 1
+            binding.pry
+        puts "Okay..Here's the ingredients for #{results[index_of_array]}!"
+        puts "THIS IS WHERE THE INGREDIENTS WILL GO!!!"
+        end
 
 
 
 
-elsif input == 'help'
-puts "LETS PUT A HELP MENU HERE SO PEOPLE KNOW WHAT THEY CAN DO"
-else
-put "try entering 'ingredient' or 'name'"
 
-end
+    end
 
 puts ' get out of here freeloader'
 
@@ -54,5 +59,5 @@ puts ' get out of here freeloader'
 def help_menu
     puts "Try entering one of the following commands."
     puts "ingredient => to search database for a particular ingredient"
-    
+
 end

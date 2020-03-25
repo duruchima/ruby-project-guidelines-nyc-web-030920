@@ -5,13 +5,16 @@ class User < ActiveRecord::Base
     def retrieve_recipe(keyword)
         keyword = keyword.downcase
         array = []
+        i = 0
         Recipe.all.select do |recipe|
            title =  recipe.title.downcase
                 if title.include?(keyword)  
-                    array << recipe.title
+                    array << "#{i+1}. #{recipe.title}"
+                    i += 1
                 end
         end
         array
+        
     end
     
 
