@@ -34,23 +34,26 @@ end
         puts "#{self.title} has been made #{array.length} times!"
     end
 
-    def self.most_popular
-        id_array = []
-        Meal.all.select do |meal|
-            id_array << meal.recipe_id #[89, 77, 88, 89, 89]
-        end
-        hash = {}
-        value = 0
-        id_array.map do |e|
-            if hash[e]
-                hash[e] += 1 
+    def self.meal_quantity
+        meal_hash = {}
+        Meal.all.map do |meal|
+            if meal_hash[:recipe]
+                binding.pry
+                meal_hash[:recipe] += 1
             else
-                hash[e] = 1
+            meal_hash[:recipe] =  meal.recipe_id
+            meal_hash[:recipe][count] = 1
             end
-            value = hash.max_by{|k,v| v}
+            binding.pry
         end
-       value[0]
     end
+    
+    # def self.most_popular
+    #     array = self.all.select do |meal|
+    #         binding.pry
+    #         meal.to_h{|m| [m, 1]}
+    #     end
+    # end
 
 #returns a random recipe from the DB for the user  
     def self.random 
