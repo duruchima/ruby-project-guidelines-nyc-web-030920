@@ -136,6 +136,7 @@ def main_menu
             recipe = Recipe.find_by(title: make_again)
             print TTY::Box.frame("Okay..Here's the ingredients for #{recipe.title}!")
             print TTY::Box.frame("#{recipe.ingredients.join(', ')}")
+            print TTY::Box.frame("Find the full recipe here: #{recipe.url}")
             back_to_main_menu
         end
 
