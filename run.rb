@@ -80,7 +80,6 @@ def main_menu
                     puts "We didn't find anything in the database for #{keyword_input}."
                     puts "Please try again"
                     back_to_main_menu
-            #if we find a keyword return all recipe titles containing that keyword
                 else
                     recipe_title = @prompt.enum_select("Enter the number of the recipe you'd like.", @results)
                     recipe = Recipe.find_by(title: recipe_title)
@@ -95,6 +94,9 @@ def main_menu
                     else answer == false 
                         back_to_main_menu
                     end
+
+            #if we find a keyword return all recipe titles containing that keyword
+                
                         
                 end
 
