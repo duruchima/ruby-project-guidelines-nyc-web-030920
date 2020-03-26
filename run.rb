@@ -64,7 +64,14 @@ def main_menu
                     print TTY::Box.frame("Okay..Here's the ingredients for #{recipe_title}!")
                     print TTY::Box.frame("#{recipe.ingredients.join(', ')}")
                     make_into_meal(recipe)
-                    back_to_main_menu
+                    answer = @prompt.yes?("Would you like more information about this recipe?")
+                    if answer == true 
+                        puts "For more information about #{recipe.title} please go to: 
+                        #{recipe.url}"
+                        back_to_main_menu
+                    else answer == false 
+                        back_to_main_menu
+                    end
                 end
 
     #if choice is keyword        
