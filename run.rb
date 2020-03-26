@@ -47,18 +47,17 @@ def main_menu
             ingredient_input = gets.chomp.downcase
 
         #search DB for all matching recipes
-        binding.pry
-        found_it = Ingredient.find_by(name: ingredient_input)
-            @results = found_it.recipes
+        @found_it = Ingredient.find_by(name: ingredient_input)
 
             #if app doesn't find any matching ingredients start over
-                if @results == []
-                    print TTY::Box.frame("We didn't find anything in the database", "for #{@ingredient_input}.")
+                if @found_it == nil
+                    print TTY::Box.frame("We didn't find anything in the database", "for #{ingredient_input}.")
                     puts "Please try again"
                     back_to_main_menu
 
             #if we find the ingredient return all recipe titles containing that ingredient
                 else
+                    @results = @found_it.recipes
                     print TTY::Box.frame("Enter the number of the recipe you'd like.")
                     recipe_title = @prompt.enum_select("", @results)
                     recipe = Recipe.find_by(title: recipe_title)
