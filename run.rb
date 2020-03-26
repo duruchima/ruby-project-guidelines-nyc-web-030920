@@ -125,7 +125,8 @@ def main_menu
                 
     #shows user the recipe that has been made the most times
         elsif @input == 'Show me the most popular recipe'
-
+            print TTY::Box.frame("The most popular recipe is: #{Meal.most_popular}")
+        back_to_main_menu
 
     #shows user all recipes they have made into meals
         elsif @input == 'Show me my meals'
