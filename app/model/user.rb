@@ -9,12 +9,11 @@ class User < ActiveRecord::Base
         Recipe.all.select do |recipe|
            title =  recipe.title.downcase
                 if title.include?(keyword)  
-                    array << "#{i+1}. #{recipe.title}"
-                    i += 1
+                    array << "#{recipe.title}"
+                    
                 end
         end
         array
-        
     end
 
     def meals_with_name
@@ -26,6 +25,10 @@ class User < ActiveRecord::Base
         recipe_name.map {|recipes| recipes_names << recipes.title}
         return recipes_names
     end
+<<<<<<< HEAD
+=======
+    
+>>>>>>> a96939772187ecd6fb95411428d8bf438353ec56
     
 
 end
