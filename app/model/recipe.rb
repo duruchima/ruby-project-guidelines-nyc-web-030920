@@ -4,11 +4,6 @@ class Recipe < ActiveRecord::Base
     has_many :ingredient_recipes
     has_many :ingredients, through: :ingredient_recipes
 
-    # def self.by_ingredient(ingredient)
-    #     self.all.select do |recipe|
-    #         recipe.seperate
-    #     end
-    # end
 def ingredients 
     array = RecipeIngredient.all.select {|recipe_ingredients| recipe_ingredients.recipes_id == self.id}
     #array.map {|ingredient_obj| Ingredient.all.select {|ingredient|ingredient.id == ingredient_obj.ingredients_id}}

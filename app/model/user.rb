@@ -26,5 +26,6 @@ class User < ActiveRecord::Base
         return recipes_names
     end
     
+    
 
 end

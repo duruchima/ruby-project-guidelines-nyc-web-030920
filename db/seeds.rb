@@ -28,7 +28,7 @@ u3 = User.create(name: "Ethan")
 #stripped_ingredients = all_ingredients.map{|ing| ing.strip}.uniq
 
 recipes_list.each do |recipe_hash|
-    recipe = Recipe.create(title: recipe_hash["title"])
+    recipe = Recipe.create(title: recipe_hash["title"], url: recipe_hash["href"])
     ingredientsarray = recipe_hash["ingredients"].split(",")
     all_ingredients = ingredientsarray.flatten.uniq
     stripped_ingredients = all_ingredients.map{|ing| ing.strip}.uniq
@@ -41,7 +41,7 @@ recipes_list.each do |recipe_hash|
 end
 
 recipes_list2.each do |recipe_hash|
-    recipe = Recipe.create(title: recipe_hash["title"])
+    recipe = Recipe.create(title: recipe_hash["title"], url: recipe_hash["href"])
     ingredientsArray = recipe_hash["ingredients"].split(",")
     
 
