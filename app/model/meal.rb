@@ -5,4 +5,6 @@ class Meal < ActiveRecord::Base
    # def get_user_name
     #    self.user_id.name
     #end
+
+    
 end
