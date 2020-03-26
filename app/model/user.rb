@@ -16,6 +16,6 @@ class User < ActiveRecord::Base
         array
         
     end
-    
+    #
 
 end
