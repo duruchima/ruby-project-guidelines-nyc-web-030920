@@ -83,24 +83,20 @@ def main_menu
                 else
                     recipe_title = @prompt.enum_select("Enter the number of the recipe you'd like.", @results)
                     recipe = Recipe.find_by(title: recipe_title)
-                    puts "Okay..Here's the ingredients for #{recipe_title}!"
-                    puts "#{recipe.ingredients.join(', ')}"
-                    answer = @prompt.yes?("Would you like more information about this recipe?")
-                    if answer == true 
-                        puts "For more information about #{recipe.title} please go to: 
-                        #{recipe.url}."
-                        back_to_main_menu
-                    else answer == false 
-
-            #if we find a keyword return all recipe titles containing that keyword
-                else
-                    recipe_title = @prompt.enum_select("Enter the number of the recipe you'd like.", @results)
-                    recipe = Recipe.find_by(title: recipe_title)
                     print TTY::Box.frame("Okay..Here's the ingredients for #{recipe_title}!")
                     print TTY::Box.frame("#{recipe.ingredients.join(', ')}")
                     make_into_meal(recipe)
-                    back_to_main_menu
+                    answer = @prompt.yes?("Would you like more information about this recipe?")
+                    if answer == true 
+                        puts "For more information about #{recipe.title} please go to: 
+                        #{recipe.url}"
+                        back_to_main_menu
+                    else answer == false 
+                        back_to_main_menu
                     end
+
+            #if we find a keyword return all recipe titles containing that keyword
+                
                         
                 end
 
@@ -111,7 +107,14 @@ def main_menu
                 print TTY::Box.frame("Okay..Here's the ingredients for #{recipe_title}!")
                 print TTY::Box.frame("#{recipe.ingredients.join(', ')}")
                 make_into_meal(recipe)
-                back_to_main_menu
+                answer = @prompt.yes?("Would you like more information about this recipe?")
+                    if answer == true 
+                        puts "For more information about #{recipe.title} please go to: 
+                        #{recipe.url}"
+                        back_to_main_menu
+                    else answer == false 
+                        back_to_main_menu
+                    end
                 
     #shows user the recipe that has been made the most times
         elsif @input == 'Show me the most popular recipe'
