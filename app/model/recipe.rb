@@ -31,15 +31,9 @@ end
              return "This recipe does not contain #{ingredient}"            
          end
      end
-
-    # def self.find_ingredient(ingredient)
-    #     objects = self.all.select do |recipe|
-    #         recipe.has_ingredient(ingredient)
-    #     end
-    #     objects
-    # end
-
-    def popularity #shows the number of times a recipe has been made (into a meal)
+     
+#shows the number of times a recipe has been made (into a meal)
+     def popularity 
         array = []
         Meal.all.select do |meal|
             if meal.recipe == self
@@ -49,15 +43,15 @@ end
         puts "#{self.title} has been made #{array.length} times!"
     end
 
-    def self.most_popular
-        array = self.all.select do |meal|
-            binding.pry
-            meal.to_h{|m| [m, 1]}
-        end
-    end
+    # def self.most_popular
+    #     array = self.all.select do |meal|
+    #         binding.pry
+    #         meal.to_h{|m| [m, 1]}
+    #     end
+    # end
 
-    def self.random #returns a random recipe from the DB for the user
-        
+#returns a random recipe from the DB for the user  
+    def self.random 
         Recipe.all.sample
     end
 
