@@ -17,15 +17,13 @@ class User < ActiveRecord::Base
     end
 
     def meals_with_name
-        array = Meal.all.select {|meals| meals.user_id == self.id}
-        new_array = array.map{|recipe| recipe.recipe_id}
-        recipe_name = []
+        recipe_object = []
         recipes_names = []
-        new_array.map do |recipe_id| recipe_name << Recipe.find(recipe_id) end
-        recipe_name.map {|recipes| recipes_names << recipes.title}
+        meal_array = Meal.all.select {|meals| meals.user_id == self.id}
+        recipe_id_array = meal_array.map{|recipe| recipe.recipe_id}
+        recipe_id_array.map {|recipe_id| recipe_object << Recipe.find(recipe_id)}
+        recipe_object.map {|recipes| recipes_names << recipes.title}
         return recipes_names
     end
     
-    
-
 end

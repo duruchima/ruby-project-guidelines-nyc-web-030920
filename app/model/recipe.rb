@@ -6,11 +6,7 @@ class Recipe < ActiveRecord::Base
 
 def ingredients 
     array = RecipeIngredient.all.select {|recipe_ingredients| recipe_ingredients.recipes_id == self.id}
-    #array.map {|ingredient_obj| Ingredient.all.select {|ingredient|ingredient.id == ingredient_obj.ingredients_id}}
     new_array = array.map{|ingredient| ingredient.ingredients_id}
-    #Ingredient.find() {|ingredient|ingredient.id == new_array.map {|ingredient_obj|ingredient_obj.ingredients_id}}
-    #Recipe.joins(:ingredients).where(ingredients: { id: new_array })
-    #filtered_meals = Ingredient.includes(:ingredients).where("ingredients.id" => new_array)
     ingredient_name = []
     ingredients_names = []
     new_array.map do |ingredient_id| ingredient_name << Ingredient.find(ingredient_id) end
@@ -18,14 +14,14 @@ def ingredients
     return ingredients_names
 end
 
-    def has_ingredient(ingredient)
-        array =  self.ingredients
-         if array.include?(ingredient)
-             return "This recipe contains #{ingredient}, here is a list of all the ingredients it contains #{self.ingredients}."
-         else
-             return "This recipe does not contain #{ingredient}"            
-         end
-     end
+def has_ingredient(ingredient)
+    array =  self.ingredients
+        if array.include?(ingredient)
+            return "This recipe contains #{ingredient}, here is a list of all the ingredients it contains #{self.ingredients}."
+        else
+            return "This recipe does not contain #{ingredient}"            
+        end
+    end
      
 #shows the number of times a recipe has been made (into a meal)
      def popularity 
