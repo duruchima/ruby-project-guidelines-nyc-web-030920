@@ -80,17 +80,6 @@ def main_menu
                     puts "We didn't find anything in the database for #{keyword_input}."
                     puts "Please try again"
                     back_to_main_menu
-                else
-                    recipe_title = @prompt.enum_select("Enter the number of the recipe you'd like.", @results)
-                    recipe = Recipe.find_by(title: recipe_title)
-                    puts "Okay..Here's the ingredients for #{recipe_title}!"
-                    puts "#{recipe.ingredients.join(', ')}"
-                    answer = @prompt.yes?("Would you like more information about this recipe?")
-                    if answer == true 
-                        puts "For more information about #{recipe.title} please go to: 
-                        #{recipe.url}."
-                        back_to_main_menu
-                    else answer == false 
 
             #if we find a keyword return all recipe titles containing that keyword
                 else
@@ -98,10 +87,12 @@ def main_menu
                     recipe = Recipe.find_by(title: recipe_title)
                     print TTY::Box.frame("Okay..Here's the ingredients for #{recipe_title}!")
                     print TTY::Box.frame("#{recipe.ingredients.join(', ')}")
-                    make_into_meal(recipe)
-                    back_to_main_menu
-                    end
-                        
+                    answer = @prompt.yes?("Would you like more information about this recipe?")
+                    if answer == true 
+                        puts "For more information about #{recipe.title} please go to: 
+                        #{recipe.url}."
+                        back_to_main_menu
+                    else answer == false   
                 end
 
     #gives user a random method from the database
