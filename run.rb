@@ -47,6 +47,7 @@ def main_menu
             ingredient_input = gets.chomp.downcase
 
         #search DB for all matching recipes
+        binding.pry
         found_it = Ingredient.find_by(name: ingredient_input)
             @results = found_it.recipes
 

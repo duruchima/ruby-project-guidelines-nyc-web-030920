@@ -37,10 +37,11 @@ end
 
 recipes_list2.each do |recipe_hash|
     recipe = Recipe.create(title: recipe_hash["title"], url: recipe_hash["href"])
-    ingredientsArray = recipe_hash["ingredients"].split(",")
+    ingredientsarray = recipe_hash["ingredients"].split(",")
+    stripped_ingredients = ingredientsarray.map{|ing| ing.strip}.uniq
     
 
-    ingredientsArray.each do |ingredient_name|
+    stripped_ingredients.each do |ingredient_name|
         ingredient = Ingredient.find_or_create_by(name: ingredient_name)
         RecipeIngredient.create(recipes_id: recipe.id, ingredients_id: ingredient.id)
     end
