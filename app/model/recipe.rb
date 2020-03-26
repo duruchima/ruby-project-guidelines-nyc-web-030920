@@ -14,7 +14,7 @@ def ingredients
     return ingredients_names
 end
 
-def has_ingredient(ingredient)
+    def has_ingredient(ingredient)
     array =  self.ingredients
         if array.include?(ingredient)
             return "This recipe contains #{ingredient}, here is a list of all the ingredients it contains #{self.ingredients}."
@@ -24,7 +24,7 @@ def has_ingredient(ingredient)
     end
      
 #shows the number of times a recipe has been made (into a meal)
-     def popularity 
+    def popularity 
         array = []
         Meal.all.select do |meal|
             if meal.recipe == self
@@ -34,16 +34,26 @@ def has_ingredient(ingredient)
         puts "#{self.title} has been made #{array.length} times!"
     end
 
-    # def self.most_popular
-    #     array = self.all.select do |meal|
-    #         binding.pry
-    #         meal.to_h{|m| [m, 1]}
-    #     end
-    # end
+    def self.most_popular
+        id_array = []
+        Meal.all.select do |meal|
+            id_array << meal.recipe_id #[89, 77, 88, 89, 89]
+        end
+        hash = {}
+        value = 0
+        id_array.map do |e|
+            if hash[e]
+                hash[e] += 1 
+            else
+                hash[e] = 1
+            end
+            value = hash.max_by{|k,v| v}
+        end
+       value[0]
+    end
 
 #returns a random recipe from the DB for the user  
     def self.random 
         Recipe.all.sample
     end
-
 end

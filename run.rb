@@ -123,7 +123,19 @@ def main_menu
                 
     #shows user the recipe that has been made the most times
         elsif @input == 'Show me the most popular recipe'
-
+                recipe_id = Recipe.most_popular
+                binding.pry
+                recipe = Recipe.find(recipe_id).title
+                print TTY::Box.frame("The most popular recipe is #{recipe}")
+                answer = @prompt.yes?("Would you like more information about this recipe?")
+                    if answer == true 
+                        puts "For more information about #{recipe.title} please go to: 
+                        #{recipe.url}"
+                        back_to_main_menu
+                    else answer == false 
+                        back_to_main_menu
+                    end
+                
 
     #shows user all recipes they have made into meals
         elsif @input == 'Show me my meals'
