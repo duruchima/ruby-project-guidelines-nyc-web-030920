@@ -22,11 +22,6 @@ u1 = User.create(name: "Tashawn")
 u2 = User.create(name: "Alex")
 u3 = User.create(name: "Ethan")
 
-
-
-#all_ingredients = ingredient_array.flatten.uniq
-#stripped_ingredients = all_ingredients.map{|ing| ing.strip}.uniq
-
 recipes_list.each do |recipe_hash|
     recipe = Recipe.create(title: recipe_hash["title"], url: recipe_hash["href"])
     ingredientsarray = recipe_hash["ingredients"].split(",")
@@ -65,21 +60,5 @@ end
 lunch = Meal.create(user_id: u1.id, recipe_id: Recipe.all.sample.id)
 breakfast = Meal.create(user_id: u2.id, recipe_id: Recipe.all.sample.id)
 dinner = Meal.create(user_id: u3.id, recipe_id: Recipe.all.sample.id)
-    #array = data["results"]
-    #ingredient_array = []
-    #array.collect do |hash|
-        
-       # hash.each do |k, v| if k == "ingredients"
-      #      ingredient_array << v.split(',')
-     #   end
-    #end
-    #end
-    #all_ingredients = ingredient_array.flatten.uniq
-    #stripped_ingredients = all_ingredients.map{|ing| ing.strip}.uniq
-    #stripped_ingredients.map do |element|
-   #binding.pry
-    #Ingredient.create(name: element)
-
-
 
 "string"
