@@ -15,7 +15,7 @@ def back_to_main_menu
     if answer == true
         main_menu()
     elsif answer == false
-        puts "Thanks for searching! See you next time #{@name}"
+        TTY::Box.frame("Thanks for searching! See you next time #{@name}")
         exit
     end
 end
@@ -102,11 +102,7 @@ def main_menu
                         back_to_main_menu
                     else answer == false 
                         back_to_main_menu
-                    end
-
-            #if we find a keyword return all recipe titles containing that keyword
-                
-                        
+                    end    
                 end
 
     #gives user a random method from the database
@@ -132,7 +128,16 @@ def main_menu
     #shows user all recipes they have made into meals
         elsif @input == 'Show me my meals'
           print TTY::Box.frame("You've eaten these recipes: #{@user.meals_with_name.join(', ')}.")
-          back_to_main_menu
+          my_meals = @user.meals_with_name
+          make_again = @prompt.enum_select("Choose which recipe to make again", my_meals, %w(exit))
+          if make_again == 'exit'
+            back_to_main_menu
+          else
+            recipe = Recipe.find_by(title: make_again)
+            print TTY::Box.frame("Okay..Here's the ingredients for #{recipe.title}!")
+            print TTY::Box.frame("#{recipe.ingredients.join(', ')}")
+            back_to_main_menu
+        end
 
     #exits the app
         elsif @input == 'Exit'
