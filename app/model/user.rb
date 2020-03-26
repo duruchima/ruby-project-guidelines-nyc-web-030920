@@ -25,10 +25,6 @@ class User < ActiveRecord::Base
         recipe_name.map {|recipes| recipes_names << recipes.title}
         return recipes_names
     end
-<<<<<<< HEAD
-=======
-    
->>>>>>> a96939772187ecd6fb95411428d8bf438353ec56
     
 
 end
