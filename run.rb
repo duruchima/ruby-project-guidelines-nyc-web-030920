@@ -20,6 +20,16 @@ def back_to_main_menu
     end
 end
 
+def make_into_meal(recipe)
+    answer = @prompt.yes?('Would you like to make a meal out of this recipe?')
+    if answer == true
+        Meal.create(recipe_id: recipe.id, user_id: @user.id)
+        print TTY::Box.frame("We added #{recipe.title} to your meals #{@name}.")
+    elsif answer == false
+
+    end
+end
+
 #prompt for search choice
 def main_menu
     @input = @prompt.select("How would you like to search for recipes? By..") do |menu|
@@ -48,10 +58,12 @@ def main_menu
 
             #if we find the ingredient return all recipe titles containing that ingredient
                 else
-                    recipe_title = @prompt.enum_select("Enter the number of the recipe you'd like.", @results)
+                    print TTY::Box.frame("Enter the number of the recipe you'd like.")
+                    recipe_title = @prompt.enum_select("", @results)
                     recipe = Recipe.find_by(title: recipe_title)
-                    puts "Okay..Here's the ingredients for #{recipe_title}!"
-                    puts "#{recipe.ingredients.join(', ')}"
+                    print TTY::Box.frame("Okay..Here's the ingredients for #{recipe_title}!")
+                    print TTY::Box.frame("#{recipe.ingredients.join(', ')}")
+                    make_into_meal(recipe)
                     back_to_main_menu
                 end
 
@@ -73,8 +85,9 @@ def main_menu
                 else
                     recipe_title = @prompt.enum_select("Enter the number of the recipe you'd like.", @results)
                     recipe = Recipe.find_by(title: recipe_title)
-                    puts "Okay..Here's the ingredients for #{recipe_title}!"
-                    puts "#{recipe.ingredients.join(', ')}"
+                    print TTY::Box.frame("Okay..Here's the ingredients for #{recipe_title}!")
+                    print TTY::Box.frame("#{recipe.ingredients.join(', ')}")
+                    make_into_meal(recipe)
                     back_to_main_menu
                 end
 
@@ -82,21 +95,23 @@ def main_menu
         elsif @input == 'Give me a random recipe'
                 recipe = Recipe.random
                 recipe_title = recipe.title
-                puts "Okay..Here's the ingredients for #{recipe_title}!"
-                puts "#{recipe.ingredients.join(', ')}"
+                print TTY::Box.frame("Okay..Here's the ingredients for #{recipe_title}!")
+                print TTY::Box.frame("#{recipe.ingredients.join(', ')}")
+                make_into_meal(recipe)
                 back_to_main_menu
                 
     #shows user the recipe that has been made the most times
         elsif @input == 'Show me the most popular recipe'
 
+
     #shows user all recipes they have made into meals
         elsif @input == 'Show me my meals'
-          puts "You've eaten these recipes: #{@user.meals_with_name.join(', ')}."
+          print TTY::Box.frame("You've eaten these recipes: #{@user.meals_with_name.join(', ')}.")
           back_to_main_menu
 
     #exits the app
         elsif @input == 'Exit'
-            puts "Thanks for searching! See you next time #{@name}"
+            print TTY::Box.frame("Thanks for searching! See you next time #{@name}")
             exit
         end
 end       
