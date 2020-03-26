@@ -54,13 +54,21 @@ def main_menu
                 if @results == []
                     puts "We didn't find anything in the database for #{keyword_input}."
                     puts "Please try again"
+                    back_to_main_menu
                 else
                     recipe_title = @prompt.enum_select("Enter the number of the recipe you'd like.", @results)
                     recipe = Recipe.find_by(title: recipe_title)
                     puts "Okay..Here's the ingredients for #{recipe_title}!"
                     puts "#{recipe.ingredients.join(', ')}"
-            
+                    answer = @prompt.yes?("Would you like more information about this recipe?")
+                    if answer == true 
+                        puts "For more information about #{recipe.title} please go to: 
+                        #{recipe.url}."
+                        back_to_main_menu
+                    else answer == false 
                     back_to_main_menu
+                    end
+                        
                 end
         elsif @input == 'Give me a random recipe'
                 recipe = Recipe.random

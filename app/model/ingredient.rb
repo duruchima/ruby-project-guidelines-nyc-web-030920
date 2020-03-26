@@ -7,7 +7,7 @@ class Ingredient < ActiveRecord::Base
         new_array = array.map{|recipe| recipe.recipes_id}
         recipe_name = []
         recipes_names = []
-        new_array.map do |recipe_id| recipe_name << Recipe.find(recipe_id) end
+        new_array.map  {|recipe_id| recipe_name << Recipe.find(recipe_id)}
         recipe_name.map {|recipes| recipes_names << recipes.title}
         return recipes_names
     end
