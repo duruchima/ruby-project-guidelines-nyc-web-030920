@@ -34,6 +34,20 @@ def has_ingredient(ingredient)
         puts "#{self.title} has been made #{array.length} times!"
     end
 
+    def self.meal_quantity
+        meal_hash = {}
+        Meal.all.map do |meal|
+            if meal_hash[:recipe]
+                binding.pry
+                meal_hash[:recipe] += 1
+            else
+            meal_hash[:recipe] =  meal.recipe_id
+            meal_hash[:recipe][count] = 1
+            end
+            binding.pry
+        end
+    end
+    
     # def self.most_popular
     #     array = self.all.select do |meal|
     #         binding.pry
