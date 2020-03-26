@@ -6,7 +6,10 @@ class Meal < ActiveRecord::Base
     #    self.user_id.name
     #end
 
+<<<<<<< HEAD
+=======
     
+>>>>>>> master
     def self.random #returns a random recipe from the DB for the user
         sample = Meal.all.sample
         sample.user_id
