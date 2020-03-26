@@ -87,12 +87,19 @@ def main_menu
                     recipe = Recipe.find_by(title: recipe_title)
                     print TTY::Box.frame("Okay..Here's the ingredients for #{recipe_title}!")
                     print TTY::Box.frame("#{recipe.ingredients.join(', ')}")
+                    make_into_meal(recipe)
                     answer = @prompt.yes?("Would you like more information about this recipe?")
                     if answer == true 
                         puts "For more information about #{recipe.title} please go to: 
-                        #{recipe.url}."
+                        #{recipe.url}"
                         back_to_main_menu
-                    else answer == false   
+                    else answer == false 
+                        back_to_main_menu
+                    end
+
+            #if we find a keyword return all recipe titles containing that keyword
+                
+                        
                 end
 
     #gives user a random method from the database
@@ -102,7 +109,14 @@ def main_menu
                 print TTY::Box.frame("Okay..Here's the ingredients for #{recipe_title}!")
                 print TTY::Box.frame("#{recipe.ingredients.join(', ')}")
                 make_into_meal(recipe)
-                back_to_main_menu
+                answer = @prompt.yes?("Would you like more information about this recipe?")
+                    if answer == true 
+                        puts "For more information about #{recipe.title} please go to: 
+                        #{recipe.url}"
+                        back_to_main_menu
+                    else answer == false 
+                        back_to_main_menu
+                    end
                 
     #shows user the recipe that has been made the most times
         elsif @input == 'Show me the most popular recipe'
