@@ -140,9 +140,9 @@ print TTY::Box.frame("Welcome to", "the recipe database!")
        if User.find_by(name: @name)
             print TTY::Box.frame("Welcome back, #{@name}!!")
             @user = User.find_by(name: @name)
-            main_menu()
+            main_menu
        else
             print TTY::Box.frame("Hi #{@name}, let's get started!")
             @user = User.create(name: @name) 
-            main_menu()
+            main_menu
         end
