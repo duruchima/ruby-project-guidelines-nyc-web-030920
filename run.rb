@@ -20,13 +20,13 @@ def back_to_main_menu
     end
 end
 
+#saves a meal instance to a user's meals for retrieval later
 def make_into_meal(recipe)
     answer = @prompt.yes?('Would you like to make a meal out of this recipe?')
     if answer == true
         Meal.create(recipe_id: recipe.id, user_id: @user.id)
         print TTY::Box.frame("We added #{recipe.title} to your meals #{@name}.")
     elsif answer == false
-
     end
 end
 
@@ -39,7 +39,6 @@ def main_menu
         menu.choice 'Show me the most popular recipe(s)'
         menu.choice 'Show me my meals'
         menu.choice 'Exit'
-    
     end    
      #if choice is ingredient
         if @input == 'Ingredient'
@@ -66,8 +65,8 @@ def main_menu
                     make_into_meal(recipe)
                     answer = @prompt.yes?("Would you like more information about this recipe?")
                     if answer == true 
-                        puts "For more information about #{recipe.title} please go to: 
-                        #{recipe.url}"
+                        print TTY::Box.frame("For more information about #{recipe.title} please go to: 
+                        #{recipe.url}")
                         back_to_main_menu
                     else answer == false 
                         back_to_main_menu
@@ -146,15 +145,21 @@ def main_menu
         elsif @input == 'Show me my meals'
           print TTY::Box.frame("You've eaten these recipes: #{@user.meals_with_name.join(', ')}.")
           my_meals = @user.meals_with_name
-          make_again = @prompt.enum_select("Choose which recipe to make again", my_meals, %w(exit))
-          if make_again == 'exit'
-            back_to_main_menu
+          binding.pry
+          if my_meals == []
+            print TTY::Box.frame("You haven't saved any meals yet!")
+                back_to_main_menu
           else
-            recipe = Recipe.find_by(title: make_again)
-            print TTY::Box.frame("Okay..Here's the ingredients for #{recipe.title}!")
-            print TTY::Box.frame("#{recipe.ingredients.join(', ')}")
-            print TTY::Box.frame("Find the full recipe here: #{recipe.url}")
-            back_to_main_menu
+            make_again = @prompt.enum_select("Choose which recipe to make again", my_meals, %w(exit))
+            if make_again == 'exit'
+                back_to_main_menu
+            else
+                recipe = Recipe.find_by(title: make_again)
+                print TTY::Box.frame("Okay..Here's the ingredients for #{recipe.title}!")
+                print TTY::Box.frame("#{recipe.ingredients.join(', ')}")
+                print TTY::Box.frame("Find the full recipe here: #{recipe.url}")
+                back_to_main_menu
+            end
         end
 
     #exits the app
@@ -167,12 +172,12 @@ end
 #Welcomes the user to the app then sends them to main_menu method
 print TTY::Box.frame("Welcome to", "the recipe database!")
 @name = @prompt.ask('What is your name?')
-       if User.find_by(name: @name)
-            print TTY::Box.frame("Welcome back, #{@name}!!")
-            @user = User.find_by(name: @name)
-            main_menu
-       else
-            print TTY::Box.frame("Hi #{@name}, let's get started!")
-            @user = User.create(name: @name) 
-            main_menu
-        end
+    if User.find_by(name: @name)
+        print TTY::Box.frame("Welcome back, #{@name}!!")
+        @user = User.find_by(name: @name)
+        main_menu
+    else
+        print TTY::Box.frame("Hi #{@name}, let's get started!")
+        @user = User.create(name: @name) 
+        main_menu
+    end

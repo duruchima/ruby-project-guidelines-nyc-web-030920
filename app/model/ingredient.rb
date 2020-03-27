@@ -11,4 +11,5 @@ class Ingredient < ActiveRecord::Base
         recipe_name.map {|recipes| recipes_names << recipes.title}
         return recipes_names
     end
+    
 end
