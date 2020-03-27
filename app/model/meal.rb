@@ -7,6 +7,7 @@ class Meal < ActiveRecord::Base
         sample.user_id
     end
 
+#returns the number of times a recipe has been made into a meal ( helper method )
     def self.meal_quantity
         meal_hash = {}
         Meal.all.map do |meal|
@@ -15,6 +16,7 @@ class Meal < ActiveRecord::Base
         meal_hash
     end
 
+#returns the title of the recipe that has been made into the most meals
     def self.most_popular
        most_times_made = 0
        most_popular_meal = ""
