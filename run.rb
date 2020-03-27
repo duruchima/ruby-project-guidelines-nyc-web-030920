@@ -27,7 +27,6 @@ def make_into_meal(recipe)
         Meal.create(recipe_id: recipe.id, user_id: @user.id)
         print TTY::Box.frame("We added #{recipe.title} to your meals #{@name}.")
     elsif answer == false
-
     end
 end
 
@@ -40,7 +39,6 @@ def main_menu
         menu.choice 'Show me the most popular recipe'
         menu.choice 'Show me my meals'
         menu.choice 'Exit'
-    
     end    
      #if choice is ingredient
         if @input == 'Ingredient'
