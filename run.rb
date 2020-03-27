@@ -20,6 +20,7 @@ def back_to_main_menu
     end
 end
 
+#saves a meal instance to a user's meals for retrieval later
 def make_into_meal(recipe)
     answer = @prompt.yes?('Would you like to make a meal out of this recipe?')
     if answer == true
@@ -66,8 +67,8 @@ def main_menu
                     make_into_meal(recipe)
                     answer = @prompt.yes?("Would you like more information about this recipe?")
                     if answer == true 
-                        puts "For more information about #{recipe.title} please go to: 
-                        #{recipe.url}"
+                        print TTY::Box.frame("For more information about #{recipe.title} please go to: 
+                        #{recipe.url}")
                         back_to_main_menu
                     else answer == false 
                         back_to_main_menu
