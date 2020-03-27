@@ -15,18 +15,25 @@ class Meal < ActiveRecord::Base
         meal_hash
     end
 
+    #def self.most_popular
+    #   most_times_made = 0
+    #   most_popular_meal = ""
+    #   meal_hash = meal_quantity
+    #   meal_hash.each do |recipe_id, times_made|
+    #    pop_level = times_made
+    #    if pop_level > most_times_made
+    #        most_times_made = pop_level
+    #        most_popular_meal = Recipe.find(recipe_id).title
+    #    end
+    #    end
+    #    return most_popular_meal
+    #end
+
     def self.most_popular
-       most_times_made = 0
-       most_popular_meal = ""
-       meal_hash = meal_quantity
-       meal_hash.each do |recipe_id, times_made|
-        pop_level = times_made
-        if pop_level > most_times_made
-            most_times_made = pop_level
-            most_popular_meal = Recipe.find(recipe_id).title
-        end
-        end
-        return most_popular_meal
+        most_popular_array = []
+        meal_hash = meal_quantity
+        meal_hash.each {|k, v| most_popular_array << Recipe.find(k).title if v == meal_hash.values.max}
+        most_popular_array.join(', ')
     end
 
 

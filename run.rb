@@ -36,7 +36,7 @@ def main_menu
         menu.choice 'Keyword'
         menu.choice 'Ingredient'
         menu.choice 'Give me a random recipe'
-        menu.choice 'Show me the most popular recipe'
+        menu.choice 'Show me the most popular recipe(s)'
         menu.choice 'Show me my meals'
         menu.choice 'Exit'
     
@@ -122,9 +122,25 @@ def main_menu
                     end
                 
     #shows user the recipe that has been made the most times
-        elsif @input == 'Show me the most popular recipe'
-            print TTY::Box.frame("The most popular recipe is: #{Meal.most_popular}")
-        back_to_main_menu
+        elsif @input == 'Show me the most popular recipe(s)'
+            print TTY::Box.frame("Here are the most popular recipe(s): #{Meal.most_popular}")
+            answer = @prompt.yes?("Would you like the recipe for one of these meals?")
+            if answer == true
+                meals = Meal.most_popular.split(', ')
+                meal_to_make = @prompt.enum_select("Which of these meals would you like to make?", meals, %w(exit))
+                if meal_to_make == 'exit'
+                    back_to_main_menu
+                else
+                    recipe = Recipe.find_by(title: meal_to_make)
+                    print TTY::Box.frame("Okay..Here's the ingredients for #{recipe.title}!")
+                    print TTY::Box.frame("#{recipe.ingredients.join(', ')}")
+                    print TTY::Box.frame("Find the full recipe here: #{recipe.url}")
+                    make_into_meal(recipe)
+                    back_to_main_menu
+                end
+            else answer == false
+            back_to_main_menu
+            end
 
     #shows user all recipes they have made into meals
         elsif @input == 'Show me my meals'
