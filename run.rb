@@ -143,9 +143,9 @@ def main_menu
 
     #shows user all recipes they have made into meals
         elsif @input == 'Show me my meals'
+            meals = @user.meals_with_name.uniq
           print TTY::Box.frame("You've eaten these recipes: #{@user.meals_with_name.join(', ')}.")
-          my_meals = @user.meals_with_name
-          binding.pry
+          my_meals = @user.meals_with_name.uniq
           if my_meals == []
             print TTY::Box.frame("You haven't saved any meals yet!")
                 back_to_main_menu
